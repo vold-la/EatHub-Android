@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/divider"
+    tools:context=".PlaceOrderActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.AppBarOverlay">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:background="@color/divider"
+                    android:theme="@style/AppTheme.PopupOverlay"
+                    app:titleTextColor="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"/>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="10">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_black_money"/>
+
+                        <TextView
+                            android:id="@+id/txt_total_cash"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="6"
+                            android:text="200"
+                            android:textSize="18sp"/>
+
+                        <TextView
+                            android:id="@+id/txt_discount_cash"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="2"
+                            android:text="(-10%)"
+                            android:visibility="gone"
+                            android:textSize="18sp"/>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@android:color/darker_gray"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="10">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_black_local_phone_24"/>
+
+                        <TextView
+                            android:id="@+id/txt_user_phone"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="8"
+                            android:text="999998888"
+                            android:textSize="18sp"/>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@android:color/darker_gray"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="10">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:src="@drawable/ic_grey_date_range_24"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="2"
+                            android:text="Date"
+                            android:textSize="18sp"/>
+
+                        <EditText
+                            android:id="@+id/edt_date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:hint="Select Date"
+                            android:inputType="none"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/magnifika"
+                android:padding="8dp"
+                android:text="Address"
+                android:textSize="24sp"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="10">
+
+                        <TextView
+                            android:id="@+id/txt_user_address"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="9"
+                            android:layout_marginLeft="8dp"
+                            android:layout_gravity="center_vertical"
+                            android:text="257 Address"
+                            android:textSize="18sp"/>
+
+                        <CheckBox
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:id="@+id/ckb_default_address"
+                            android:layout_weight="1"/>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@android:color/darker_gray"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="10">
+
+                        <TextView
+                            android:id="@+id/txt_new_address"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:layout_marginLeft="8dp"
+                            android:layout_gravity="center_vertical"
+                            android:text=""
+                            android:textSize="18sp"/>
+
+                        <Button
+                            android:id="@+id/btn_add_new_address"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:text="Add New Address"
+                            android:background="@drawable/border_button"
+                            android:textSize="12sp"
+                            android:textColor="@android:color/white"/>
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@android:color/darker_gray"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/magnifika"
+                android:padding="8dp"
+                android:text="Discount"
+                android:textSize="24sp"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/edt_discount_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter or scan your code"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btn_scan_qr"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/border_button"
+                            android:fontFamily="@font/magnifika"
+                            android:text="Proceed"
+                            android:padding="8dp"
+                            android:drawableLeft="@drawable/ic_white_camera_alt"
+                            android:textColor="@android:color/white"/>
+
+                        <Button
+                            android:id="@+id/btn_apply"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/border_button"
+                            android:fontFamily="@font/magnifika"
+                            android:text="Apply"
+                            android:padding="8dp"
+                            android:drawableLeft="@drawable/ic_white_check"
+                            android:textColor="@android:color/white"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/magnifika"
+                android:padding="8dp"
+                android:text="Payment"
+                android:textSize="24sp"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <RadioButton
+                        android:id="@+id/rdi_cod"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Cash On Delivery" />
+
+                    <RadioButton
+                        android:id="@+id/rdi_online_payment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Online Payment" />
+
+
+                </RadioGroup>
+
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/btn_proceed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="8dp"
+                android:background="@drawable/border_button"
+                android:fontFamily="@font/magnifika"
+                android:text="Proceed"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:weightSum="10">
+
+        <ImageView
+            android:id="@+id/img_food"
+            android:src="@drawable/app_icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="10"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/txt_food_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/button_color"
+                android:fontFamily="@font/magnifika"
+                android:text="BIRYANI"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="18">
+
+
+                <TextView
+                android:id="@+id/txt_food_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_weight="5"
+                android:textStyle="italic"
+                android:text="180"/>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_grey_clear"/>
+
+                <ImageView
+                    android:id="@+id/img_decrease"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:src="@drawable/ic_primary_remove"/>
+
+                <TextView
+                    android:id="@+id/txt_quantity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_weight="2"
+                    android:textStyle="italic"
+                    android:text="1"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/quantity_background_textview"/>
+
+                <ImageView
+                    android:id="@+id/img_increase"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:src="@drawable/ic_primary_add"/>
+
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_grey_drag_handle"/>
+
+                <TextView
+                    android:id="@+id/txt_price_new"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_weight="5"
+                    android:textStyle="italic"
+                    android:text="180"
+                    android:layout_gravity="center_horizontal"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="18">
+
+                <TextView
+                    android:id="@+id/txt_extra_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Extra Price : +180"
+                    android:textSize="14sp"
+                    android:textStyle="italic"/>
+
+            </LinearLayout>
+
+
+            </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_delete_food"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_primary_close"/>
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

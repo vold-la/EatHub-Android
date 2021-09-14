@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LocationActivity">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".NearbyRestaurantActivity" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_height="180dp"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        app:cardBackgroundColor="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/locationContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="17dp"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:id="@+id/locationText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_bold"
+                android:textSize="21sp"
+                android:textColor="@color/colorAccent"
+                android:text="Current Location"/>
+
+            <EditText
+                android:id="@+id/locationActualText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/locationText"
+                android:layout_marginTop="7dp"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/open_sans"
+                android:textSize="16sp"
+                android:background="@drawable/menu_item_add_btn_background"
+                android:padding="11dp"
+                android:hint="Type Address Manually"/>
+
+            <Button
+                android:id="@+id/saveLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/locationActualText"
+                android:text="Confirm Location"
+                android:textAllCaps="false"
+                android:textSize="17sp"
+                android:fontFamily="@font/open_sans"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/white"
+                android:layout_marginTop="17dp"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

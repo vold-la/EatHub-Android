@@ -1,0 +1,115 @@
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragments.RestaurantFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/custom_toolbar"
+            android:id="@+id/toolBar"/>
+
+
+        <LinearLayout
+            android:id="@+id/filtr"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/toolBar"
+            android:paddingLeft="5dp"
+            android:weightSum="4"
+            android:layout_marginTop="10dp"
+            >
+
+            <Button
+                android:id="@+id/sort"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.9"
+                android:text="@string/Sort"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/empty_food_button"
+                android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"/>
+            <Button
+                android:id="@+id/cuisines"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.1"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/empty_food_button"
+                android:text="@string/Cuisines"
+                android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"/>
+            <Button
+                android:id="@+id/cost"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.9"
+                android:text="@string/Cost"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/empty_food_button"
+                android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"/>
+            <Button
+                android:id="@+id/ratings"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/Ratings"
+                android:background="@drawable/empty_food_button"
+                android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/cuisineTextLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Top cuisines for you"
+            android:fontFamily="@font/open_sans_semibold"
+            android:layout_below="@+id/filtr"
+            android:layout_marginStart="12dp"
+            android:textSize="21sp"
+            android:textColor="@color/colorAccent"
+            />
+
+
+        <GridView
+            android:id="@+id/cuisineGridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cuisineTextLabel"
+            android:layout_marginTop="7dp"
+            android:overScrollMode="never"
+            android:numColumns="3"
+            android:verticalSpacing="1dp"
+            android:horizontalSpacing="1dp"/>
+
+        <TextView
+            android:id="@+id/trendingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trending"
+            android:layout_below="@+id/cuisineGridView"
+            android:layout_marginTop="21dp"
+            android:layout_marginStart="12dp"
+            android:textColor="@color/colorAccent"
+            android:fontFamily="@font/open_sans_bold"
+            android:textSize="23sp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_restaurant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/trendingTextView"
+            android:layout_marginTop="7dp"
+            android:clipToPadding="false"
+            android:paddingStart="12dp"
+            android:paddingEnd="23dp"
+            android:overScrollMode="never"/>
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>
+

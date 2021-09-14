@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:id="@+id/rdi_sort">
+
+
+        <RadioButton
+            android:id="@+id/popularity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Popularity"
+            android:textSize="15sp"
+            android:layoutDirection="rtl"
+            android:checked="true"/>
+        <RadioButton
+            android:id="@+id/rating_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layoutDirection="rtl"
+            android:text="Ratings : High to Low"/>
+        <RadioButton
+            android:id="@+id/delivery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layoutDirection="rtl"
+            android:text="Delivery"/>
+        <RadioButton
+            android:id="@+id/cost_asc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layoutDirection="rtl"
+            android:text="Cost: Low to High"/>
+        <RadioButton
+            android:id="@+id/cost_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layoutDirection="rtl"
+            android:text="Cost: High to Low"/>
+</RadioGroup>

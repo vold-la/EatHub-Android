@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/foodMark"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_marginTop="19dp"
+        android:src="@drawable/veg_symbol"/>
+
+    <TextView
+        android:id="@+id/menuItemName"
+        android:text="Name"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/foodMark"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="11dp"
+        android:textSize="15sp"
+        android:textColor="@color/colorAccent"
+        android:fontFamily="@font/open_sans_semibold"
+        android:layout_marginEnd="10dp"/>
+
+    <TextView
+        android:id="@+id/menuItemCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/menuItemName"
+        android:text="cat"
+        android:layout_toEndOf="@+id/foodMark"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="3dp"
+        android:textSize="12sp"
+        android:fontFamily="@font/open_sans"
+        android:textColor="@color/gray"/>
+
+    <TextView
+        android:id="@+id/menuItemPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/menuItemCategory"
+        android:text="price"
+        android:layout_toEndOf="@+id/foodMark"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="3dp"
+        android:fontFamily="@font/open_sans"
+        android:textSize="13sp"
+        android:textColor="@color/colorAccent"/>
+
+    <TextView
+        android:id="@+id/notAvailableText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="* Item not available"
+        android:fontFamily="@font/open_sans"
+        android:textStyle="italic"
+        android:textSize="12sp"
+        android:layout_below="@+id/menuItemPrice"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="3dp"
+        android:visibility="gone"/>
+
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:layout_alignParentEnd="true">
+
+            <ImageView
+            android:id="@+id/img_desc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/cart_icon"
+            />
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:background="@drawable/empty_food_button"
+                android:weightSum="4">
+
+
+            <ImageView
+            android:id="@+id/image_decrease"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:src="@drawable/ic_primary_remove"/>
+
+            <TextView
+            android:id="@+id/text_quantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_weight="2"
+            android:textStyle="italic"
+            android:text="   Add"
+            android:layout_gravity="center_horizontal"/>
+
+            <ImageView
+            android:id="@+id/image_increase"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_primary_add"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+</RelativeLayout>
