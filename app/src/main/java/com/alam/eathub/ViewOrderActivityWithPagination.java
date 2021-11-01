@@ -20,8 +20,7 @@ import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
-import com.alam.eathub.Adapter.MyFavoriteAdapter;
-import com.alam.eathub.Adapter.MyOrderAdapter;
+import com.alam.eathub.Adapter.MyOrderAdapterWithPagination;
 import com.alam.eathub.Common.Common;
 import com.alam.eathub.Interface.ILoadMore;
 import com.alam.eathub.Model.Order;
@@ -33,13 +32,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ViewOrderActivity extends AppCompatActivity implements ILoadMore {
+public class ViewOrderActivityWithPagination extends AppCompatActivity implements ILoadMore {
 
     IMyRestaurantAPI myRestaurantAPI;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     AlertDialog dialog;
 
-    MyOrderAdapter adapter;
+    MyOrderAdapterWithPagination adapter;
     List<Order> orderList;
     int maxData = 0;
 
@@ -117,7 +116,7 @@ public class ViewOrderActivity extends AppCompatActivity implements ILoadMore {
                                 //Create Adapter
                                 orderList = new ArrayList<>();
                                 orderList = (orderModel.getResult());
-                                adapter = new MyOrderAdapter(this , orderList , recycler_view_order);
+                                adapter = new MyOrderAdapterWithPagination(this , orderList , recycler_view_order);
                                 adapter.setiLoadMore(this);
                                 recycler_view_order.setAdapter(adapter);
                                 recycler_view_order.setLayoutAnimation(layoutAnimationController);

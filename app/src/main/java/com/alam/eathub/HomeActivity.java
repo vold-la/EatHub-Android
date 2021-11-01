@@ -33,6 +33,8 @@ import com.alam.eathub.fragments.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.mapbox.api.geocoding.v5.models.CarmenFeature;
+import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -184,7 +186,7 @@ public class HomeActivity extends AppCompatActivity  {
             startActivity(new Intent(HomeActivity.this , NearbyRestaurantActivity.class));
         }
         else if(id == R.id.nav_order_history){
-            startActivity(new Intent(HomeActivity.this , ViewOrderActivity.class));
+            startActivity(new Intent(HomeActivity.this , ViewOrderActivityWithPagination.class));
         }
         else if(id == R.id.nav_update_info){
             startActivity(new Intent(HomeActivity.this , UpdateInfoActivity.class));
@@ -222,10 +224,11 @@ public class HomeActivity extends AppCompatActivity  {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+       // Log.e("res : ", String.valueOf(requestCode));
         if (resultCode == Activity.RESULT_OK && requestCode == Common.REQUEST_CODE_AUTOCOMPLETE) {
-            //CarmenFeature feature = PlaceAutocomplete.getPlace(data);
-
-            Toast.makeText(this, "ok", Toast.LENGTH_LONG).show();
+            CarmenFeature feature = PlaceAutocomplete.getPlace(data);
+         //   Log.e("res : ", String.valueOf(feature.center()));
+           // Toast.makeText(this, "ok", Toast.LENGTH_LONG).show();
         }
         else {
             List<Fragment> fragments = getSupportFragmentManager().getFragments();
@@ -236,6 +239,4 @@ public class HomeActivity extends AppCompatActivity  {
             }
         }
     }
-
-
 }

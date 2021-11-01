@@ -2,8 +2,10 @@ package com.alam.eathub.fragments;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
@@ -42,6 +44,9 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.mapbox.api.geocoding.v5.models.CarmenFeature;
+import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete;
+import com.mapbox.mapboxsdk.plugins.places.autocomplete.model.PlaceOptions;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -49,6 +54,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -68,7 +74,6 @@ public class RestaurantFragment extends Fragment {
     LocationRequest locationRequest;
     LocationCallback locationCallback;
     FusedLocationProviderClient fusedLocationProviderClient;
-    Location currentLocation;
     JsonObject filters;
     JsonObject allFilters;
     LinearLayoutManager linearLayoutManager;
@@ -109,7 +114,8 @@ public class RestaurantFragment extends Fragment {
     @Override
     public void onDestroy() {
         compositeDisposable.clear();
-        fusedLocationProviderClient.removeLocationUpdates(locationCallback);
+        if(fusedLocationProviderClient != null || locationCallback != null)
+            fusedLocationProviderClient.removeLocationUpdates(locationCallback);
         super.onDestroy();
     }
 
@@ -153,8 +159,7 @@ public class RestaurantFragment extends Fragment {
         CuisineImageAdapter adapter = new CuisineImageAdapter();
         mCuisineFoodView.setAdapter(adapter);
         mAddressContainer.setOnClickListener(view1 -> {
-          /*
-          for Mapbox auto complete
+  //          for Mapbox auto complete
             PlaceOptions placeOptions = PlaceOptions.builder()
                     .backgroundColor(Color.parseColor("#FFFFFF"))
                     .limit(10)
@@ -166,9 +171,10 @@ public class RestaurantFragment extends Fragment {
                     .placeOptions(placeOptions)
                     .build(getActivity());
             startActivityForResult(intent, Common.REQUEST_CODE_AUTOCOMPLETE);
-*/
+/*
             Intent intent = new Intent(getActivity(), LocationActivity.class);
             startActivity(intent);
+*/
         });
         Toolbar mToolbar = view.findViewById(R.id.customToolBar);
         ((AppCompatActivity) requireActivity()).setSupportActionBar(mToolbar);
@@ -362,7 +368,6 @@ public class RestaurantFragment extends Fragment {
         });
     }
 
-
     public  class CuisineImageAdapter extends BaseAdapter {
         @Override
         public int getCount() {
@@ -434,6 +439,28 @@ public class RestaurantFragment extends Fragment {
 
     }
 
+    private void getCityIdFromLocation(double lat , double lng){
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("long", lng);
+        jsonObject.addProperty("lat", lat);
+
+        compositeDisposable.add(myRestaurantAPI.getCityId(jsonObject)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(cityId -> {
+                    Common.CITY_TITLE = cityId.getTitle();
+                    Common.CITY_ID = Integer.parseInt(cityId.getCityId());
+                    JsonObject jsonObject1 = new JsonObject();
+                    JsonObject filterObject = new JsonObject();
+                    filterObject.addProperty("location.city_id" , Common.CITY_ID);
+                    jsonObject1.add("filters" , filterObject);
+
+                    loadRestaurant(jsonObject1);
+
+                })
+        );
+    }
+
     private void buildLocationCallback() {
         locationCallback = new LocationCallback(){
             @Override
@@ -442,28 +469,9 @@ public class RestaurantFragment extends Fragment {
                 lng = locationResult.getLastLocation().getLongitude();
                 lat = locationResult.getLastLocation().getLatitude();
 
+                getCityIdFromLocation(lat , lng);
+
                 Log.e("res la : " , lat +" == "+lng);
-
-                JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("long", locationResult.getLastLocation().getLongitude());
-                jsonObject.addProperty("lat", locationResult.getLastLocation().getLatitude());
-
-                compositeDisposable.add(myRestaurantAPI.getCityId(jsonObject)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(cityId -> {
-                            Common.CITY_TITLE = cityId.getTitle();
-                            Common.CITY_ID = Integer.parseInt(cityId.getCityId());
-                            JsonObject jsonObject1 = new JsonObject();
-                            JsonObject filterObject = new JsonObject();
-                            filterObject.addProperty("location.city_id" , Common.CITY_ID);
-                            jsonObject1.add("filters" , filterObject);
-
-                            loadRestaurant(jsonObject1);
-
-                        })
-                );
-
             }
         };
     }
@@ -509,6 +517,17 @@ public class RestaurantFragment extends Fragment {
         super.onStop();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+      //  Log.e("ressss2 : ", String.valueOf(requestCode));
+        if (resultCode == Activity.RESULT_OK && requestCode == Common.REQUEST_CODE_AUTOCOMPLETE) {
+            CarmenFeature feature = PlaceAutocomplete.getPlace(data);
+            getCityIdFromLocation(feature.center().latitude() , feature.center().longitude());
+          //  Log.e("ressss2 : ", String.valueOf(feature.center()));
+
+        }
+    }
 
     //Listen Event Bus
     @Subscribe(threadMode = ThreadMode.MAIN)

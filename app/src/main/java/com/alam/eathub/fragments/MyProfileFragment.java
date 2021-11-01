@@ -3,8 +3,8 @@ package com.alam.eathub.fragments;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,23 +12,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alam.eathub.Common.Common;
-import com.alam.eathub.HomeActivity;
 import com.alam.eathub.MainActivity;
+import com.alam.eathub.OrderHistoryActivity;
 import com.alam.eathub.R;
 import com.alam.eathub.UpdateInfoActivity;
-import com.alam.eathub.ViewOrderActivity;
+import com.alam.eathub.ViewOrderActivityWithPagination;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyProfileFragment extends Fragment implements View.OnClickListener {
 
@@ -99,7 +93,8 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener 
                 break;
 
             case R.id.myOrdersImage:
-                Intent intent = new Intent(getActivity(), ViewOrderActivity.class);
+                Log.e("ress : " , "myorder");
+                Intent intent = new Intent(getActivity(), OrderHistoryActivity.class);
                 startActivity(intent);
                 break;
 

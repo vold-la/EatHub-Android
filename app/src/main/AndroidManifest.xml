@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".LocationActivity"></activity>
+        <activity android:name=".OrderHistoryActivity"></activity>
+        <activity android:name=".LocationActivity" />
         <activity android:name=".CartActivity" />
         <activity android:name=".RestaurantMainActivity" />
         <activity android:name=".TrackOrderActivity" />
@@ -22,24 +23,15 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
-        <activity
-            android:name=".NearbyRestaurantActivity" />
-        <activity
-            android:name=".ViewOrderActivity" />
-        <activity
-            android:name=".CartListActivity" />
-        <activity
-            android:name=".PlaceOrderActivity" />
-        <activity
-            android:name=".FoodDetailActivity" />
-        <activity
-            android:name=".FoodListActivity" />
-        <activity
-            android:name=".MenuActivity" />
-        <activity
-            android:name=".UpdateInfoActivity" />
-        <activity
-            android:name=".HomeActivity" />
+        <activity android:name=".NearbyRestaurantActivity" />
+        <activity android:name=".ViewOrderActivityWithPagination" />
+        <activity android:name=".CartListActivity" />
+        <activity android:name=".PlaceOrderActivity" />
+        <activity android:name=".FoodDetailActivity" />
+        <activity android:name=".FoodListActivity" />
+        <activity android:name=".MenuActivity" />
+        <activity android:name=".UpdateInfoActivity" />
+        <activity android:name=".HomeActivity" />
         <activity
             android:name=".SplashScreen"
             android:theme="@style/SplashTheme">
@@ -61,9 +53,9 @@
             </intent-filter>
         </service>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

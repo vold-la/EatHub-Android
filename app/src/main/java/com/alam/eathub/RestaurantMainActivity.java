@@ -185,7 +185,7 @@ public class RestaurantMainActivity extends AppCompatActivity {
 
     private void countCartByRestaurant() {
 
-        Log.e("countCartByRestaurant" , "Started = "+Common.myCurrentUser.getPhone()+" ; id ="+Common.myCurrentRestaurant.getId());
+     //   Log.e("countCartByRestaurant" , "Started = "+Common.myCurrentUser.getPhone()+" ; id ="+Common.myCurrentRestaurant.getId());
         myCartDataSource.countItemInCart(Common.myCurrentUser.getId(),
                 Integer.parseInt(Common.myCurrentRestaurant.getId()))
                 .subscribeOn(Schedulers.io())

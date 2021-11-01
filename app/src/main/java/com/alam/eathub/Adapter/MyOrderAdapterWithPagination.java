@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class MyOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MyOrderAdapterWithPagination extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int VIEW_TYPE_LOADING = 0;
     private static final int VIEW_TYPE_ITEM = 1;
@@ -35,7 +35,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     boolean isLoading = false;
     int totalItemCount = 0 , lastVisibleItem = 0 ,visibleThreshold = 10;
 
-    public MyOrderAdapter(Context context, List<Order> orderList, RecyclerView recyclerView) {
+    public MyOrderAdapterWithPagination(Context context, List<Order> orderList, RecyclerView recyclerView) {
         this.context = context;
         this.orderList = orderList;
         this.recyclerView = recyclerView;

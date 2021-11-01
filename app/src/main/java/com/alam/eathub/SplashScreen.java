@@ -15,6 +15,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.alam.eathub.Common.Common;
@@ -93,6 +94,7 @@ public class SplashScreen extends AppCompatActivity {
                                                                 .subscribe(myUser -> {
                                                                     if(!myUser.getErr()) {
                                                                         Common.myCurrentUser = myUser.getUser();
+                                                                        Log.e("tg :", String.valueOf(myUser.getUser().getOrders().size()));
                                                                         Intent intent = new Intent(SplashScreen.this, HomeActivity.class);
                                                                         startActivity(intent);
                                                                         finish();

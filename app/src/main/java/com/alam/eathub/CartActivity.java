@@ -91,11 +91,10 @@ public class CartActivity extends AppCompatActivity implements PaymentResultList
         init();
     }
 
-    @SuppressLint("SetTextI18n")
     private void init() {
 
         TextView mToolBarText = findViewById(R.id.confirmOrderText);
-        mToolBarText.setText("Confirm Order");
+   //     mToolBarText.setText("Confirm Order");
         mRestaurantCartName = findViewById(R.id.restaurantCartName);
         TextView mChangeAddressText = findViewById(R.id.changeAddressText);
         ImageView mCartBackBtn = findViewById(R.id.cartBackBtn);
@@ -103,7 +102,6 @@ public class CartActivity extends AppCompatActivity implements PaymentResultList
         mUserAddressText = findViewById(R.id.userDeliveryAddress);
         mTotalAmountText = findViewById(R.id.totAmount);
         Button mCheckoutBtn = findViewById(R.id.payAmountBtn);
-        mCartItemRecyclerView = findViewById(R.id.cartItemRecyclerView);
         cod = findViewById(R.id.cod);
         online_payement = findViewById(R.id.online_payment);
 
@@ -111,8 +109,7 @@ public class CartActivity extends AppCompatActivity implements PaymentResultList
         cartDataSource  =new MyLocalCartDataSource(MyCartDatabase.getInstance(this).myCartDAO());
 
         mRestaurantCartName.setText(Common.myCurrentRestaurant.getName());
-        mUserAddressText.setText(Common.myCurrentUser.getAddress().get(0).getAddress());
-
+       // mUserAddressText.setText(Common.myCurrentUser.getAddress().get(0).getAddress());
 
         mChangeAddressText.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), UpdateInfoActivity.class);
@@ -123,9 +120,6 @@ public class CartActivity extends AppCompatActivity implements PaymentResultList
         mCartBackBtn.setOnClickListener(view -> {
             this.onBackPressed();
         });
-
-        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mCartItemRecyclerView.setLayoutManager(linearLayoutManager);
 
         mCheckoutBtn.setOnClickListener(view -> {
 
@@ -140,6 +134,7 @@ public class CartActivity extends AppCompatActivity implements PaymentResultList
     }
 
     private void getOrderId(int amount , boolean isCod) {
+        Log.e("res getorderid : " , String.valueOf(isCod));
         compositeDisposable.add(myRestaurantAPI.getOrderId(amount)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -148,10 +143,10 @@ public class CartActivity extends AppCompatActivity implements PaymentResultList
                     placeOrder(isCod);
                 })
         );
-
     }
 
     private void placeOrder(boolean b) {
+        Log.e("res placeorder : " , String.valueOf(b));
         if(!b){
             Checkout checkout = new Checkout();
             checkout.setKeyID(Common.RAZOR_PAY_KEY_ID);
@@ -245,10 +240,11 @@ public class CartActivity extends AppCompatActivity implements PaymentResultList
     }
 
     private void movetoHome() {
-        Intent intent = new Intent(CartActivity.this, HomeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
+       Log.e("res : " , "move to home");
+         Intent intent = new Intent(CartActivity.this, HomeActivity.class);
+         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+         startActivity(intent);
+         finish();
     }
 
     @Override
@@ -290,7 +286,11 @@ public class CartActivity extends AppCompatActivity implements PaymentResultList
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void setCartItem(MyCartItemEvent event) {
+        Log.e("res set cart: " , String.valueOf(event.isSuccess()));
         if(event.isSuccess()){
+            mCartItemRecyclerView = findViewById(R.id.cartItemRecyclerView);
+            linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+            mCartItemRecyclerView.setLayoutManager(linearLayoutManager);
             adapter = new MyyCartAdapter(this ,event.getCartItems());
             mCartItemRecyclerView.setAdapter(adapter);
         }

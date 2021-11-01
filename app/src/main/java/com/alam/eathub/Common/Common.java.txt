@@ -37,9 +37,9 @@ public class Common {
     public static final String API_RESTAURANT_ENDPOINT_TEST = "https://eathub-nbackend.herokuapp.com/api/";
    // public static final String API_RESTAURANT_ENDPOINT_TEST = "http://192.168.2.114:5000/api/";
     public static final String API_PAYMENT_ENDPOINT = "https://eathub-payment.herokuapp.com/";
-    public static final String RAZOR_PAY_KEY_ID="rzp_test_mZXDpbDRz5P2t0";
+    public static final String RAZOR_PAY_KEY_ID=""; // your token
     public static String API_KEY = "";
-    public static String MAPBOX_API_KEY = "";
+    public static String MAPBOX_API_KEY = ""; // your token
     public static String CITY_TITLE = "";
     public static int REQUEST_CODE_AUTOCOMPLETE = 121;
     public static int CITY_ID;
