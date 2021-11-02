@@ -1,70 +1,36 @@
 package com.alam.eathub;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.alam.eathub.Adapter.MyAdapter;
-import com.alam.eathub.Adapter.RestaurantSliderAdapter;
 import com.alam.eathub.Common.Common;
-import com.alam.eathub.Model.EventBus.RestaurantLoadEvent;
-import com.alam.eathub.Model.Restaurant;
-import com.alam.eathub.Retrofit.IMyRestaurantAPI;
 import com.alam.eathub.Retrofit.IMyy;
 import com.alam.eathub.Retrofit.RC;
-import com.alam.eathub.Retrofit.RetrofitClient;
 import com.alam.eathub.Retrofit.Services.PicassoImageLoadingService;
-import com.alam.eathub.fragments.FavouriteFragment;
+import com.alam.eathub.fragments.DineOutFragment;
 import com.alam.eathub.fragments.MyProfileFragment;
 import com.alam.eathub.fragments.RestaurantFragment;
 import com.alam.eathub.fragments.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 import com.mapbox.api.geocoding.v5.models.CarmenFeature;
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import dmax.dialog.SpotsDialog;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 import ss.com.bannerslider.Slider;
 
 public class HomeActivity extends AppCompatActivity  {
@@ -116,13 +82,15 @@ public class HomeActivity extends AppCompatActivity  {
                 Fragment selectedFragment = null;
                 switch (item.getItemId()) {
                     case R.id.nav_restaurants:
+                        Common.RESTAURANT_FRAGMENT_VIEW= 0;
                         selectedFragment = new RestaurantFragment();
                         break;
                     case R.id.nav_search:
                         selectedFragment = new SearchFragment();
                         break;
                     case R.id.nav_favourites:
-                        selectedFragment = new FavouriteFragment();
+                        Common.RESTAURANT_FRAGMENT_VIEW= 1;
+                        selectedFragment = new RestaurantFragment();
                         break;
                     case R.id.nav_profile:
                         selectedFragment = new MyProfileFragment();

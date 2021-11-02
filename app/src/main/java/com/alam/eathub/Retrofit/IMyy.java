@@ -1,6 +1,7 @@
 package com.alam.eathub.Retrofit;
 
 import com.alam.eathub.Model.DiscountModel;
+import com.alam.eathub.Model.My.CityCollection.Collections;
 import com.alam.eathub.Model.My.CityId;
 import com.alam.eathub.Model.My.MyyRestaurant;
 import com.alam.eathub.Model.My.OrderId;
@@ -34,6 +35,11 @@ public interface IMyy {
     @Headers({"Content-Type:application/json"})
     @POST("search/cityId")
     Observable<CityId> getCityId(@Body JsonObject jsonObject);
+
+    @Headers({"Content-Type:application/json"})
+    @POST("search/collection")
+    Observable<Collections> getCityCollection(@Body JsonObject jsonObject);
+
 
     @Headers({"Content-Type:application/json"})
     @POST("users/getUserByPhone")

@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".OrderHistoryActivity"></activity>
+        <activity android:name=".CollectionsActivity"></activity>
+        <activity android:name=".OrderHistoryActivity" />
         <activity android:name=".LocationActivity" />
         <activity android:name=".CartActivity" />
         <activity android:name=".RestaurantMainActivity" />
@@ -53,9 +54,9 @@
             </intent-filter>
         </service>
     </application>
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>

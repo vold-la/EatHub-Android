@@ -75,16 +75,16 @@
             />
 
 
-        <GridView
+
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cuisineGridView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:layout_below="@+id/cuisineTextLabel"
-            android:layout_marginTop="7dp"
-            android:overScrollMode="never"
-            android:numColumns="3"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
             android:verticalSpacing="1dp"
-            android:horizontalSpacing="1dp"/>
+            android:horizontalSpacing="1dp"
+            android:layout_marginTop="7dp"/>
 
         <TextView
             android:id="@+id/trendingTextView"

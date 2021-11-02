@@ -43,6 +43,7 @@ public class Common {
     public static String CITY_TITLE = "";
     public static int REQUEST_CODE_AUTOCOMPLETE = 121;
     public static int CITY_ID;
+    public static int RESTAURANT_FRAGMENT_VIEW = 0;
     public static final int DEFAULT_COLUMN_TYPE = 0;
     public static final int FULL_WIDTH_COLUMN = 1;
     public static final String REMEMBER_FBID = "REMEMBER_FBID";
