@@ -13,10 +13,14 @@
         android:orientation="vertical">
 
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
         <com.flaviofaria.kenburnsview.KenBurnsView
             android:id="@+id/collection_img_restaurant"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="match_parent"
             android:scaleType="centerCrop"/>
 
         <LinearLayout
@@ -24,7 +28,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp"
-            android:background="@color/divider">
+            android:layout_gravity="bottom">
 
             <TextView
                 android:id="@+id/collection_title"
@@ -54,6 +58,8 @@
                 android:textColor="@color/gray"/>
 
         </LinearLayout>
+
+        </FrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_collection_restaurant"

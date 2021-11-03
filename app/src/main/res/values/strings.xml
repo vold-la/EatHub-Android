@@ -29,5 +29,7 @@
     <string name="Cuisines">Cuisines</string>
     <string name="Cost">Cost</string>
     <string name="Ratings">Ratings</string>
+    <string name="topSliderDelivery">Top cuisines for you</string>
+    <string name="topSliderDineOut">Curated Collections for you</string>
 
 </resources>

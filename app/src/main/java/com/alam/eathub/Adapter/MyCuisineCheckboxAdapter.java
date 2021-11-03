@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,7 @@ public class MyCuisineCheckboxAdapter extends RecyclerView.Adapter<MyCuisineChec
 
     Context context;
     List<CuisineCheckboxModel> list;
+    private String searchCuisine;
     private List<Integer> checkedIndex;
     private List<String> checkedName;
     private String name[] = {
@@ -60,7 +62,7 @@ public class MyCuisineCheckboxAdapter extends RecyclerView.Adapter<MyCuisineChec
             "Steak" ,"Sushi" ,"Tamil","Tea","Thai", "Tibetan","Turkish","Wraps"};
     private boolean isSelected[] = new boolean[70];
 
-    public MyCuisineCheckboxAdapter(Context context, List<Integer> b) {
+    public MyCuisineCheckboxAdapter(Context context, List<Integer> b , String searchCuisine) {
         this.context = context;
         if(b != null) {
             Log.e("res b:" , String.valueOf(b));
@@ -72,6 +74,7 @@ public class MyCuisineCheckboxAdapter extends RecyclerView.Adapter<MyCuisineChec
                 checkedName.add(name[b.get(i)]);
             }
         }
+        this.searchCuisine = searchCuisine;
     }
 
     @NonNull
@@ -84,38 +87,37 @@ public class MyCuisineCheckboxAdapter extends RecyclerView.Adapter<MyCuisineChec
     @Override
     public void onBindViewHolder(@NonNull MyCuisineCheckboxAdapter.MyViewHolder holder, int position) {
 
-        holder.cuisineText.setText(name[position]);
-        if(isSelected[position])
-            holder.cuisineCheck.setChecked(true);
-        else
-            holder.cuisineCheck.setChecked(false);
+        if(searchCuisine == null || name[position].toLowerCase().contains(searchCuisine.toLowerCase())) {
 
-        holder.cuisineCheck.setOnClickListener(view -> {
-            if(isSelected[position]){
-                checkedIndex.remove(Integer.valueOf(position));
-                checkedName.remove(name[position]);
-                Log.e("res uncheck:" , String.valueOf(checkedName));
-                Log.e("res uncheck:" , String.valueOf(checkedIndex));
-                isSelected[position] = false;
+            holder.cuisineText.setText(name[position]);
+            if (isSelected[position])
+                holder.cuisineCheck.setChecked(true);
+            else
                 holder.cuisineCheck.setChecked(false);
-            }
-            else{
-                if(checkedIndex == null) {
-                    checkedIndex = new ArrayList<>();
-                    checkedName = new ArrayList<>();
-                }
+
+            holder.cuisineCheck.setOnClickListener(view -> {
+                if (isSelected[position]) {
+                    checkedIndex.remove(Integer.valueOf(position));
+                    checkedName.remove(name[position]);
+                    isSelected[position] = false;
+                    holder.cuisineCheck.setChecked(false);
+                } else {
+                    if (checkedIndex == null) {
+                        checkedIndex = new ArrayList<>();
+                        checkedName = new ArrayList<>();
+                    }
                     checkedIndex.add(position);
                     checkedName.add(name[position]);
-                Log.e("res check:" , String.valueOf(checkedName));
-                Log.e("res check:" , String.valueOf(checkedIndex));
+                    //   Log.e("res check:", String.valueOf(checkedName));
+                    //   Log.e("res check:", String.valueOf(checkedIndex));
                     isSelected[position] = true;
                     holder.cuisineCheck.setChecked(true);
-            }
-        });
-
-        //Event
-       // holder.setListener((view, position1) -> {
-         //           });
+                }
+            });
+        }
+        else {
+            holder.rootView.setLayoutParams(holder.params);
+        }
     }
 
     @Override
@@ -124,11 +126,11 @@ public class MyCuisineCheckboxAdapter extends RecyclerView.Adapter<MyCuisineChec
     }
 
     public List<Integer> getCheckedIndex(){
-        Log.e("res get:" , String.valueOf(checkedIndex));
+        //Log.e("res get:" , String.valueOf(checkedIndex));
         return checkedIndex;
     }
     public List<String> getCheckedName(){
-        Log.e("res get:" , String.valueOf(checkedName));
+        //Log.e("res get:" , String.valueOf(checkedName));
         return checkedName;
     }
 
@@ -138,6 +140,12 @@ public class MyCuisineCheckboxAdapter extends RecyclerView.Adapter<MyCuisineChec
         TextView cuisineText;
         @BindView(R.id.cuisineCheck)
         CheckBox cuisineCheck;
+        @BindView(R.id.root_cuisine_checkbox)
+        RelativeLayout rootView;
+
+
+        ViewGroup.LayoutParams params;
+
 
         Unbinder unbinder;
         IOnRecyclerViewClickListener listener;
@@ -149,6 +157,7 @@ public class MyCuisineCheckboxAdapter extends RecyclerView.Adapter<MyCuisineChec
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             unbinder = ButterKnife.bind(this, itemView);
+            params  = new RelativeLayout.LayoutParams(0,0);
 
             //itemView.setOnClickListener(this);
         }

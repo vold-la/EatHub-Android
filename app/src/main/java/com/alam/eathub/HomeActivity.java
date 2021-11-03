@@ -13,7 +13,6 @@ import com.alam.eathub.Common.Common;
 import com.alam.eathub.Retrofit.IMyy;
 import com.alam.eathub.Retrofit.RC;
 import com.alam.eathub.Retrofit.Services.PicassoImageLoadingService;
-import com.alam.eathub.fragments.DineOutFragment;
 import com.alam.eathub.fragments.MyProfileFragment;
 import com.alam.eathub.fragments.RestaurantFragment;
 import com.alam.eathub.fragments.SearchFragment;
@@ -88,7 +87,7 @@ public class HomeActivity extends AppCompatActivity  {
                     case R.id.nav_search:
                         selectedFragment = new SearchFragment();
                         break;
-                    case R.id.nav_favourites:
+                    case R.id.nav_dineout:
                         Common.RESTAURANT_FRAGMENT_VIEW= 1;
                         selectedFragment = new RestaurantFragment();
                         break;

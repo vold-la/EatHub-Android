@@ -65,7 +65,6 @@ public class Common {
     public static  int COST ;
     private static final String GOOGLE_API_URL = "https://maps.googleapis.com/";
 
-
     public static JsonObject getALL_FILTERS() {
         return ALL_FILTERS;
     }

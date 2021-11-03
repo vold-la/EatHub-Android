@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -45,6 +48,7 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mapbox.api.geocoding.v5.models.CarmenFeature;
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete;
@@ -109,7 +113,7 @@ public class RestaurantFragment extends Fragment {
     IMyy myRestaurantAPI;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     android.app.AlertDialog dialog;
-    TextView cityTitle;
+    TextView cityTitle , topSlider;
     Button sort, cuisines, cost, ratings;
 
     LayoutAnimationController layoutAnimationController;
@@ -154,6 +158,17 @@ public class RestaurantFragment extends Fragment {
         cost = view.findViewById(R.id.cost);
 
         TextView searchRestaurant = view.findViewById(R.id.searchRestaurant);
+        topSlider = view.findViewById(R.id.txt_top_slider);
+        mTopSliderView = view.findViewById(R.id.cuisineGridView);
+
+
+        if(Common.RESTAURANT_FRAGMENT_VIEW == 0 ){
+            topSlider.setText(R.string.topSliderDelivery);
+        }
+        else {
+
+            topSlider.setText(R.string.topSliderDineOut);
+        }
 
         searchRestaurant.setOnClickListener(view1 -> {
             getFragmentManager().beginTransaction()
@@ -164,9 +179,6 @@ public class RestaurantFragment extends Fragment {
 
         filters = new JsonObject();
         allFilters = new JsonObject();
-
-        mTopSliderView = view.findViewById(R.id.cuisineGridView);
-
 
         mAddressContainer.setOnClickListener(view1 -> {
             //          for Mapbox auto complete
@@ -181,11 +193,8 @@ public class RestaurantFragment extends Fragment {
                     .placeOptions(placeOptions)
                     .build(getActivity());
             startActivityForResult(intent, Common.REQUEST_CODE_AUTOCOMPLETE);
-/*
-            Intent intent = new Intent(getActivity(), LocationActivity.class);
-            startActivity(intent);
-*/
         });
+
         Toolbar mToolbar = view.findViewById(R.id.customToolBar);
         ((AppCompatActivity) requireActivity()).setSupportActionBar(mToolbar);
 
@@ -270,7 +279,7 @@ public class RestaurantFragment extends Fragment {
 
                         filters.add("cuisines", n);
                         allFilters.add("filters", filters);
-                        Log.e("ress  :", String.valueOf(n));
+//                        Log.e("ress  :", String.valueOf(n));
                         Common.setFILTERS(filters);
                         Common.setALL_FILTERS(allFilters);
                     }
@@ -290,17 +299,21 @@ public class RestaurantFragment extends Fragment {
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Common.COST = 0;
-                Common.RATINGS = 0;
-                Common.SORT = "popularity";
-                Common.setALL_FILTERS(new JsonObject());
-                Common.setFILTERS(new JsonObject());
+                clearAllFilter();
                 bottomSheetDialog.dismiss();
                 checkCityIdAndLoad();
             }
         });
 
         bottomSheetDialog.show();
+    }
+
+    private void clearAllFilter(){
+        Common.COST = 0;
+        Common.RATINGS = 0;
+        Common.SORT = "popularity";
+        Common.setALL_FILTERS(new JsonObject());
+        Common.setFILTERS(new JsonObject());
     }
 
     private void initSort(View v) {
@@ -332,8 +345,28 @@ public class RestaurantFragment extends Fragment {
         RecyclerView mCuisineRecycler = v.findViewById(R.id.searchCuisineRecyclerView);
         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         mCuisineRecycler.setLayoutManager(linearLayoutManager);
-        adapter = new MyCuisineCheckboxAdapter(getContext(), b);
+        EditText searchCuisine  = v.findViewById(R.id.searchCuisine);
+
+        adapter = new MyCuisineCheckboxAdapter(getContext(), b , null);
         mCuisineRecycler.setAdapter(adapter);
+
+        searchCuisine.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.e("res srch :" , s.toString());
+                adapter = new MyCuisineCheckboxAdapter(getContext(), b , s.toString());
+                mCuisineRecycler.setAdapter(adapter);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
     }
 
     private void initRatings(View v) {
@@ -411,6 +444,18 @@ public class RestaurantFragment extends Fragment {
                         .apply(new RequestOptions()
                                 .override(200, 200))
                         .into(holder.image);
+
+                holder.image.setOnClickListener(view -> {
+                   JsonObject jsonObject =  Common.getFILTERS();
+                   clearAllFilter();
+
+                   JsonArray jsonArray = new JsonArray();
+                   jsonArray.add(fruitNames[position]);
+                   jsonObject.add("cuisines" , jsonArray);
+                   Common.setFILTERS(jsonObject);
+                   checkCityIdAndLoad();
+                });
+
             } else {
                 String title = mCityCollection.getCollections().get(position).getCollection().getTitle();
                 int textLength = title.length();
@@ -447,7 +492,6 @@ public class RestaurantFragment extends Fragment {
                 });
             }
         }
-
 
         @Override
         public int getItemCount() {
@@ -558,6 +602,18 @@ public class RestaurantFragment extends Fragment {
         private void loadRestaurant(JsonObject jsonObject) {
             dialog.show();
             cityTitle.setText(Common.CITY_TITLE);
+
+            if(Common.RESTAURANT_FRAGMENT_VIEW == 0 ) {
+                jsonObject.remove("has_table_booking");
+                jsonObject.addProperty("has_online_delivery", 1);
+            }
+            else {
+                jsonObject.remove("has_online_delivery");
+                jsonObject.addProperty("has_table_booking", 1);
+            }
+
+            Log.e("res call : " , String.valueOf(jsonObject));
+
             compositeDisposable.add(myRestaurantAPI.getMyRestaurant(jsonObject)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

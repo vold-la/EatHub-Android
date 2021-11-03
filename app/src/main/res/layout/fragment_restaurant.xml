@@ -10,7 +10,9 @@
         android:layout_height="wrap_content">
 
         <include layout="@layout/custom_toolbar"
-            android:id="@+id/toolBar"/>
+            android:id="@+id/toolBar"
+            android:layout_height="80dp"
+            android:layout_width="match_parent"/>
 
 
         <LinearLayout
@@ -22,6 +24,7 @@
             android:paddingLeft="5dp"
             android:weightSum="4"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             >
 
             <Button
@@ -31,8 +34,10 @@
                 android:layout_weight="0.9"
                 android:text="@string/Sort"
                 android:layout_marginEnd="12dp"
+                android:paddingStart="5dp"
                 android:background="@drawable/empty_food_button"
                 android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"/>
+
             <Button
                 android:id="@+id/cuisines"
                 android:layout_width="0dp"
@@ -40,8 +45,10 @@
                 android:layout_weight="1.1"
                 android:layout_marginEnd="12dp"
                 android:background="@drawable/empty_food_button"
+                android:paddingStart="5dp"
                 android:text="@string/Cuisines"
                 android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"/>
+
             <Button
                 android:id="@+id/cost"
                 android:layout_width="0dp"
@@ -49,24 +56,27 @@
                 android:layout_weight="0.9"
                 android:text="@string/Cost"
                 android:layout_marginEnd="12dp"
+                android:paddingStart="5dp"
                 android:background="@drawable/empty_food_button"
                 android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"/>
+
             <Button
                 android:id="@+id/ratings"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/Ratings"
+                android:paddingStart="5dp"
                 android:background="@drawable/empty_food_button"
                 android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"/>
 
         </LinearLayout>
 
         <TextView
-            android:id="@+id/cuisineTextLabel"
+            android:id="@+id/txt_top_slider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Top cuisines for you"
+            android:text="@string/topSliderDelivery"
             android:fontFamily="@font/open_sans_semibold"
             android:layout_below="@+id/filtr"
             android:layout_marginStart="12dp"
@@ -80,7 +90,7 @@
             android:id="@+id/cuisineGridView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_below="@+id/cuisineTextLabel"
+            android:layout_below="@+id/txt_top_slider"
             android:scrollbarAlwaysDrawVerticalTrack="true"
             android:verticalSpacing="1dp"
             android:horizontalSpacing="1dp"
@@ -92,8 +102,7 @@
             android:layout_height="wrap_content"
             android:text="Trending"
             android:layout_below="@+id/cuisineGridView"
-            android:layout_marginTop="21dp"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="10dp"
             android:textColor="@color/colorAccent"
             android:fontFamily="@font/open_sans_bold"
             android:textSize="23sp"/>
@@ -105,6 +114,7 @@
             android:layout_below="@+id/trendingTextView"
             android:layout_marginTop="7dp"
             android:clipToPadding="false"
+
             android:paddingStart="12dp"
             android:paddingEnd="23dp"
             android:overScrollMode="never"/>

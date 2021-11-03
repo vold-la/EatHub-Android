@@ -32,12 +32,14 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_baseline_location_on_24"/>
 
             <TextView
                 android:id="@+id/userLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:text="getting location ..."
                 android:fontFamily="@font/open_sans"
                 android:textColor="@color/gray"
@@ -69,6 +71,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_marginLeft="12dp"
+            android:gravity="center_vertical"
             android:hint="Search For Restaurant"
             android:drawableStart="@drawable/ic_baseline_search_24"
             android:drawablePadding="9dp"
